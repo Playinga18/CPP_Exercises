@@ -17,6 +17,9 @@ public:
 
     void set_cost(int value){ _peluche = value;}
 
+    bool operator==(const Plush& oth) {
+        return this == &oth;
+    }
 
 private:
     int _peluche = 10;
@@ -24,4 +27,8 @@ private:
 
 ostream& operator<<(ostream& os, const Plush& other) {
     return os << "Plush costs " << other.get_cost();
+}
+
+bool comparePlushByCost(const Plush& a, const Plush& b){
+    return a.get_cost() < b.get_cost();
 }

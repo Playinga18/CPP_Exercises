@@ -3,7 +3,7 @@
 #include <iostream>
 #include <vector>
 
-#include <Plush.hpp>
+#include "Plush.hpp"
 #include <optional>
 #include <algorithm>
 
@@ -38,20 +38,14 @@ public:
 
     optional<Plush> buy(int value)
     {
-        int min = _stock[0].get_cost();
-        for (unsigned int i = 1; i < _stock.size(); i++)
-        {
-            if ( _stock[min].get_cost() > _stock[i].get_cost()){
-                min = i;
-            }
-        }
-        auto tmp = _stock[min];
-        if (tmp.get_cost() > value) {
+        auto minPlushIter = min_element(_stock.begin(), _stock.end(), comparePlushByCost);
+        if (minPlushIter == _stock.end() || minPlushIter->get_cost() > value) {
             return nullopt;
         }
-        _money += tmp.get_cost();
-        _stock.erase(_stock.cbegin() + min);
-        return make_optional(tmp);
+        Plush minPlush = *minPlushIter;
+        _money += minPlush.get_cost();
+        _stock.erase(minPlushIter);
+        return make_optional(minPlush);
     }
 
     int get_debt_amount() const { return (_money * 1/10) + _money;}

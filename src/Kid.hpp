@@ -1,6 +1,7 @@
 #pragma once
 
 #include <iostream>
+#include "PlushStore.hpp"
 
 using namespace std;
 
@@ -14,6 +15,13 @@ public:
     string get_name() const {return _name;}
 
     int get_money() const {return _money;}
+
+    void buy_plush(PlushStore store){
+        auto op = store.buy(_money);
+        if (op){
+            _money -= op.value().get_cost();
+        }
+    }
 
 private:
     string _name;
