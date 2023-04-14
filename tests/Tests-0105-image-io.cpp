@@ -19,8 +19,8 @@ TEST_CASE("We can write and open images with their path")
 
     {
         Image<uint8_t, WIDTH, HEIGHT> img(foo);
-        //img.save("images/lol.png");
-        lib::save(img, "images/lol.png");
+        //img.save("images/het_rat.png");
+        lib::save(img, "images/het_rat.png");
         
         for (size_t j = 0; j < HEIGHT; ++j)
         {
